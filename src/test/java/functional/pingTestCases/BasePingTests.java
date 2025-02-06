@@ -1,34 +1,42 @@
-package pingTestCases;
+package functional.pingTestCases;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.decorators.PingDataDtoDecorator;
 import core.entites.PingDataDto;
+import core.entites.PingResults;
+import core.factories.PingDataDtoFactory;
 import core.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 import java.io.*;
 
+
 @Slf4j
 public class BasePingTests {
     protected PingDataDto testConfig;
-    protected PingDataDtoDecorator pingDataDtoDecorator = new PingDataDtoDecorator();
+    protected PingDataDtoFactory pingDataDtoFactory = new PingDataDtoFactory();
     protected static String resultsFilePath;
     private static String testDataFilePath;
-    private static final String PINGER_EXECUTABLE = "src/main/resources/pinger";
-
+    private static final String PINGER_EXECUTABLE = "./pinger";
+    private static final String WORKING_DIRECTORY = "src/main/resources/";
 
     protected void runPingTest(PingDataDto testData) {
-        testDataFilePath = "src/main/resources/" + super.getClass().getSimpleName() + "TestData.json";
-        resultsFilePath = "src/main/resources/" + super.getClass().getSimpleName() + "Results.json";
+        testDataFilePath = WORKING_DIRECTORY + super.getClass().getSimpleName() + "TestData.json";
+        resultsFilePath = WORKING_DIRECTORY + super.getClass().getSimpleName() + "Results.json";
+
 
         // Save the DTO to JSON file
         JsonUtils.saveDtoToJsonFile(testData, testDataFilePath);
 
         // Pass the file path to pinger instead of the inline JSON string
-        executePinger(testDataFilePath);
+        executePinger(testDataFilePath); //todo - this should return some kinda dto with execution results to be used later during validation
+        //todo move validation to a separate method + add negative scenario handling
         validateResults();
     }
 
@@ -60,57 +68,7 @@ public class BasePingTests {
         } catch (Exception e) {
             log.error("Error executing pinger: {}", e.getMessage());
         }
-    }
 
-    private void validateResults() {
-        try {
-            // Check if results file exists
-            File resultsFile = new File(resultsFilePath);
-            if (!resultsFile.exists()) {
-                log.error("Results file {} does not exist!", resultsFilePath);
-                Assert.fail("Results file not found.");
-            }
-
-            // Log the contents of results.json
-            BufferedReader reader = new BufferedReader(new FileReader(resultsFile));
-            StringBuilder content = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-            log.info("Results file content:\n{}", content);
-            reader.close();
-
-            // Parse results.json
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode rootNode = mapper.readTree(resultsFile);
-            JsonNode entries = rootNode.get("entries");
-
-            if (entries == null || !entries.isArray() || entries.isEmpty()) {
-                Assert.fail("No entries found in results.json");
-            }
-
-            boolean testPassed = false;
-            for (JsonNode entry : entries) {
-                String address = entry.get("endpoint").get("addr").asText();
-                int successfulPings = entry.get("successful_pings").asInt();
-                int minSuccessRequired = rootNode.get("min_successful_pings").asInt();
-
-                if (address.equals(testConfig.getEndpoints().getFirst().getAddress()) && successfulPings >= minSuccessRequired) {
-                    testPassed = true;
-                    break;
-                }
-            }
-
-            log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
-            Assert.assertTrue(testPassed, "Expected at least " + rootNode.get("min_successful_pings").asInt() +
-                    " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
-        } catch (IOException e) {
-            log.error("Error parsing results.json: {}", e.getMessage());
-            Assert.fail("Failed to parse results.json");
-        }
-
-        cleanUpGeneratedFiles();
     }
 
     protected String runPingerCommand(String... args) {
@@ -142,6 +100,93 @@ public class BasePingTests {
         }
         return output.toString().trim();
     }
+
+    private void validateResults() {
+        try {
+            File resultsFile = new File(resultsFilePath);
+            if (!resultsFile.exists()) {
+                log.error("❌ Results file {} does not exist!", resultsFilePath);
+                Assert.fail("Results file not found.");
+            }
+
+            // Parse results.json into DTO
+            InputStream is = new FileInputStream(resultsFile);
+            String jsonTxt = IOUtils.toString(is, "UTF-8");
+            System.out.println(jsonTxt);
+            JSONObject json = new JSONObject(jsonTxt);
+
+            PingResults results = JsonUtils.read(json.toString(), new TypeReference<PingResults>() {
+            });
+
+            if (results.getEntries() == null || results.getEntries().isEmpty()) {
+                Assert.fail("No entries found in results.json");
+            }
+
+            boolean testPassed = results.getEntries().stream()
+                    .anyMatch(entry -> entry.getEndpoint().getAddr().equals(testConfig.getEndpoints().getFirst().getAddress())
+                            && entry.getSuccessfulPings() >= results.getMinSuccessfulPings());
+
+            log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
+            Assert.assertTrue(testPassed, "Expected at least " + results.getMinSuccessfulPings() +
+                    " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
+        } catch (IOException e) {
+            log.error("Error parsing results.json: {}", e.getMessage());
+            Assert.fail("Failed to parse results.json");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+//    private void validateResults() {
+//        try {
+//            // Check if results file exists
+//            File resultsFile = new File(resultsFilePath);
+//            if (!resultsFile.exists()) {
+//                log.error("Results file {} does not exist!", resultsFilePath);
+//                Assert.fail("Results file not found.");
+//            }
+//
+//            // Log the contents of results.json
+//            BufferedReader reader = new BufferedReader(new FileReader(resultsFile));
+//            StringBuilder content = new StringBuilder();
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                content.append(line).append("\n");
+//            }
+//            log.info("Results file content:\n{}", content);
+//            reader.close();
+//
+//            // Parse results.json
+//            ObjectMapper mapper = new ObjectMapper();
+//            JsonNode rootNode = mapper.readTree(resultsFile);
+//            JsonNode entries = rootNode.get("entries");
+//
+//            if (entries == null || !entries.isArray() || entries.isEmpty()) {
+//                Assert.fail("No entries found in results.json");
+//            }
+//
+//            boolean testPassed = false;
+//            for (JsonNode entry : entries) {
+//                String address = entry.get("endpoint").get("addr").asText();
+//                int successfulPings = entry.get("successful_pings").asInt();
+//                int minSuccessRequired = rootNode.get("min_successful_pings").asInt();
+//
+//                if (address.equals(testConfig.getEndpoints().getFirst().getAddress()) && successfulPings >= minSuccessRequired) {
+//                    testPassed = true;
+//                    break;
+//                }
+//            }
+//
+//            log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
+//            Assert.assertTrue(testPassed, "Expected at least " + rootNode.get("min_successful_pings").asInt() +
+//                    " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
+//        } catch (IOException e) {
+//            log.error("Error parsing results.json: {}", e.getMessage());
+//            Assert.fail("Failed to parse results.json");
+//        }
+//
+//        cleanUpGeneratedFiles();
+//    }
 
     public void validateReportFileStructure() {
         try {

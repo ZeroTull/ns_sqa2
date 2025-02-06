@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="310a2dbb-2794-4edf-9f40-b261f5969c28" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/core/entites/Endpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/core/entites/EndpointReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/core/entites/PingResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/decorators/PingDataDtoDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/factories/PingDataDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/core/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/core/utils/JsonUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS01_G_VerifyApplicationLaunchesCorrectly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/smoke/NS01_G_VerifyApplicationLaunchesCorrectly.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS02_G_VerifyUsageMessageWhenNoArgumentsProvided.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/NS02_G_VerifyUsageMessageWhenNoArgumentsProvided.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS03_G_VerifyApplicationReadsValidConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sanity/NS03_G_VerifyApplicationReadsValidConfigFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS04_G_VerifyApplicationPingsEndpointsAndLogsResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/NS04_G_VerifyApplicationPingsEndpointsAndLogsResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS05_G_VerifyApplicationGeneratesOutputJsonFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sanity/NS05_G_VerifyApplicationGeneratesOutputJsonFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/generalTestCases/PingerAppGeneralTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/PingerAppGeneralTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/BasePingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/BasePingTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS01_CloudFlareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS01_CloudFlareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS02_GoogleDnsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS02_GoogleDnsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS03_MySoWanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS03_MySoWanTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS04_MyRouterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS04_MyRouterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS05_MyGrandmaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS05_MyGrandmaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS06_TestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS06_TestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pingTestCases/NS07_ValidateReportStructureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/functional/pingTestCases/NS07_ValidateReportStructureTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "TestNG./Users/dmitriychervanev/Library/Caches/JetBrains/IdeaIC2023.3/temp-testng-customsuite.xml.executor": "Debug",
+    "TestNG.<default>.executor": "Run",
+    "TestNG.NS01_CloudFlareTest.executor": "Run",
+    "TestNG.NS01_CloudFlareTest.testCloudflarePing.executor": "Run",
+    "TestNG.NS05_G_VerifyApplicationGeneratesOutputJsonFile.executor": "Run",
+    "TestNG.pingTestCases.executor": "Run",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="core.entites" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.NS01_CloudFlareTest.testCloudflarePing">
+    <configuration name="NS01_CloudFlareTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ns_sqa2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="functional.pingTestCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="functional.pingTestCases" />
+      <option name="MAIN_CLASS_NAME" value="functional.pingTestCases.NS01_CloudFlareTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NS01_CloudFlareTest.testCloudflarePing" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ns_sqa2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="functional.pingTestCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="functional.pingTestCases" />
+      <option name="MAIN_CLASS_NAME" value="functional.pingTestCases.NS01_CloudFlareTest" />
+      <option name="METHOD_NAME" value="testCloudflarePing" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NS05_G_VerifyApplicationGeneratesOutputJsonFile" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ns_sqa2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="smoke.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="generalTestCases" />
+      <option name="MAIN_CLASS_NAME" value="sanity.NS05_G_VerifyApplicationGeneratesOutputJsonFile" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="/Users/dmitriychervanev/Library/Caches/JetBrains/IdeaIC2023.3/temp-testng-customsuite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ns_sqa2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="functional.pingTestCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SUITE_NAME" value="$USER_HOME$/Library/Caches/JetBrains/IdeaIC2023.3/temp-testng-customsuite.xml" />
+      <option name="PACKAGE_NAME" value="functional.pingTestCases" />
+      <option name="MAIN_CLASS_NAME" value="functional.pingTestCases.NS01_CloudFlareTest" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ns_sqa2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.NS01_CloudFlareTest.testCloudflarePing" />
+        <item itemvalue="TestNG./Users/dmitriychervanev/Library/Caches/JetBrains/IdeaIC2023.3/temp-testng-customsuite.xml" />
+        <item itemvalue="TestNG.NS01_CloudFlareTest" />
+        <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="TestNG.NS05_G_VerifyApplicationGeneratesOutputJsonFile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/functional/pingTestCases/BasePingTests.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/functional/pingTestCases/BasePingTests.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/functional/pingTestCases/BasePingTests.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,11 +1,7 @@
-package generalTestCases;
+package functional;
 
 import core.utils.JsonUtils;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import pingTestCases.BasePingTests;
-
-import java.io.*;
+import functional.pingTestCases.BasePingTests;
 
 public class PingerAppGeneralTests extends BasePingTests {
     protected static String RESULTS_FILE_PATH = "src/main/resources/GeneralTestResults.json";
@@ -14,7 +10,7 @@ public class PingerAppGeneralTests extends BasePingTests {
         String fileName = this.getClass().getSimpleName() + "TestData.json";
         String filePath = "src/main/resources/" + fileName;
 
-        testConfig = pingDataDtoDecorator.getPingDataDto();
+        testConfig = pingDataDtoFactory.createPingDataDto();
         JsonUtils.saveDtoToJsonFile(testConfig, filePath);
 
         return fileName;

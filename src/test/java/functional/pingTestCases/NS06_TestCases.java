@@ -1,4 +1,4 @@
-package pingTestCases;
+package functional.pingTestCases;
 
 import core.entites.EndpointDto;
 import core.entites.PingDataDto;
@@ -9,13 +9,13 @@ import java.util.List;
 public class NS06_TestCases extends BasePingTests {
     @Test
     public void ignoredEndpointTest() {
-        testConfig = pingDataDtoDecorator.getPingDataDto("8.8.8.8", "Google DNS Ignored", true, 1, 1);
+        testConfig = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Ignored", true, 1, 1);
         runPingTest(testConfig);
     }
 
     @Test
     public void minSuccessfulPingsEdgeCaseTest() {
-        testConfig = pingDataDtoDecorator.getPingDataDto("8.8.8.8", "Google DNS Edge", false, 5, 3);
+        testConfig = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Edge", false, 5, 3);
         runPingTest(testConfig);
     }
 
