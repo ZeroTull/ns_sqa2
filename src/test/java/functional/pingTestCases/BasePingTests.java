@@ -102,10 +102,28 @@ public class BasePingTests {
     }
 
     private void validateResults() {
+        PingResults results = parseResultsFile();
+
+        if (results.getEntries() == null || results.getEntries().isEmpty()) {
+            Assert.fail("No entries found in results.json");
+        }
+
+        boolean testPassed = results.getEntries().stream()
+                .anyMatch(entry -> entry.getEndpoint().getAddr().equals(testConfig.getEndpoints().getFirst().getAddress())
+                        && entry.getSuccessfulPings() >= results.getMinSuccessfulPings());
+
+        log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
+        Assert.assertTrue(testPassed, "Expected at least " + results.getMinSuccessfulPings() +
+                " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
+    }
+
+
+    private PingResults parseResultsFile() {
+        PingResults results = new PingResults();
         try {
             File resultsFile = new File(resultsFilePath);
             if (!resultsFile.exists()) {
-                log.error("❌ Results file {} does not exist!", resultsFilePath);
+                log.error("Results file {} does not exist!", resultsFilePath);
                 Assert.fail("Results file not found.");
             }
 
@@ -115,26 +133,14 @@ public class BasePingTests {
             System.out.println(jsonTxt);
             JSONObject json = new JSONObject(jsonTxt);
 
-            PingResults results = JsonUtils.read(json.toString(), new TypeReference<PingResults>() {
+            results = JsonUtils.read(json.toString(), new TypeReference<>() {
             });
-
-            if (results.getEntries() == null || results.getEntries().isEmpty()) {
-                Assert.fail("No entries found in results.json");
-            }
-
-            boolean testPassed = results.getEntries().stream()
-                    .anyMatch(entry -> entry.getEndpoint().getAddr().equals(testConfig.getEndpoints().getFirst().getAddress())
-                            && entry.getSuccessfulPings() >= results.getMinSuccessfulPings());
-
-            log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
-            Assert.assertTrue(testPassed, "Expected at least " + results.getMinSuccessfulPings() +
-                    " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             log.error("Error parsing results.json: {}", e.getMessage());
             Assert.fail("Failed to parse results.json");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
         }
+        //todo - check if it's valid to return it here
+        return results;
     }
 
 //    private void validateResults() {
