@@ -6,15 +6,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.entites.PingDataDto;
 import core.entites.PingResults;
 import core.factories.PingDataDtoFactory;
+import core.utils.FileUtils;
 import core.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 @Slf4j
@@ -26,7 +27,7 @@ public class BasePingTests {
     private static final String PINGER_EXECUTABLE = "./pinger";
     private static final String WORKING_DIRECTORY = "src/main/resources/";
 
-    protected void runPingTest(PingDataDto testData) {
+    protected void executeTest(PingDataDto testData) {
         testDataFilePath = WORKING_DIRECTORY + super.getClass().getSimpleName() + "TestData.json";
         resultsFilePath = WORKING_DIRECTORY + super.getClass().getSimpleName() + "Results.json";
 
@@ -43,15 +44,10 @@ public class BasePingTests {
     private void executePinger(String testConfigFilePath) {
         try {
             // Ensure file exists before execution
-            File configFile = new File(testConfigFilePath);
-            if (!configFile.exists()) {
-                log.error("Config file {} does not exist!", testConfigFilePath);
-                Assert.fail("Config file not found.");
-            }
+            FileUtils.checkIfFileExists(testConfigFilePath);
+            log.info("Running Pinger: {} {} {}", PINGER_EXECUTABLE, testConfigFilePath, resultsFilePath);
 
-            log.info("🚀 Running Pinger: {} {} {}", PINGER_EXECUTABLE, testConfigFilePath, resultsFilePath);
-
-            // Pass only filenames, not full paths
+            //Tip: pass only filenames, not full paths
             ProcessBuilder processBuilder = new ProcessBuilder("./pinger",
                     new File(testConfigFilePath).getName(),
                     new File(resultsFilePath).getName());
@@ -62,48 +58,20 @@ public class BasePingTests {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                log.info("🔹 {}", line);
+                log.info("{}", line);
             }
             process.waitFor();
         } catch (Exception e) {
             log.error("Error executing pinger: {}", e.getMessage());
         }
-
-    }
-
-    protected String runPingerCommand(String... args) {
-        StringBuilder output = new StringBuilder();
-        try {
-            ProcessBuilder processBuilder;
-            if (args.length > 0) {
-                String[] command = new String[args.length + 1];
-                command[0] = "./pinger";
-                System.arraycopy(args, 0, command, 1, args.length);
-                processBuilder = new ProcessBuilder(command);
-            } else {
-                processBuilder = new ProcessBuilder("./pinger");
-            }
-
-            processBuilder.directory(new File("src/main/resources"));
-            processBuilder.redirectErrorStream(true);
-
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-            process.waitFor();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return "";
-        }
-        return output.toString().trim();
     }
 
     private void validateResults() {
-        PingResults results = parseResultsFile();
+        PingResults results = FileUtils.parseResultsFile(resultsFilePath, new TypeReference<>() {
+        });
 
+
+        //todo - move to process method
         if (results.getEntries() == null || results.getEntries().isEmpty()) {
             Assert.fail("No entries found in results.json");
         }
@@ -117,83 +85,7 @@ public class BasePingTests {
                 " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
     }
 
-
-    private PingResults parseResultsFile() {
-        PingResults results = new PingResults();
-        try {
-            File resultsFile = new File(resultsFilePath);
-            if (!resultsFile.exists()) {
-                log.error("Results file {} does not exist!", resultsFilePath);
-                Assert.fail("Results file not found.");
-            }
-
-            // Parse results.json into DTO
-            InputStream is = new FileInputStream(resultsFile);
-            String jsonTxt = IOUtils.toString(is, "UTF-8");
-            System.out.println(jsonTxt);
-            JSONObject json = new JSONObject(jsonTxt);
-
-            results = JsonUtils.read(json.toString(), new TypeReference<>() {
-            });
-        } catch (JSONException | IOException e) {
-            log.error("Error parsing results.json: {}", e.getMessage());
-            Assert.fail("Failed to parse results.json");
-        }
-        //todo - check if it's valid to return it here
-        return results;
-    }
-
-//    private void validateResults() {
-//        try {
-//            // Check if results file exists
-//            File resultsFile = new File(resultsFilePath);
-//            if (!resultsFile.exists()) {
-//                log.error("Results file {} does not exist!", resultsFilePath);
-//                Assert.fail("Results file not found.");
-//            }
-//
-//            // Log the contents of results.json
-//            BufferedReader reader = new BufferedReader(new FileReader(resultsFile));
-//            StringBuilder content = new StringBuilder();
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                content.append(line).append("\n");
-//            }
-//            log.info("Results file content:\n{}", content);
-//            reader.close();
-//
-//            // Parse results.json
-//            ObjectMapper mapper = new ObjectMapper();
-//            JsonNode rootNode = mapper.readTree(resultsFile);
-//            JsonNode entries = rootNode.get("entries");
-//
-//            if (entries == null || !entries.isArray() || entries.isEmpty()) {
-//                Assert.fail("No entries found in results.json");
-//            }
-//
-//            boolean testPassed = false;
-//            for (JsonNode entry : entries) {
-//                String address = entry.get("endpoint").get("addr").asText();
-//                int successfulPings = entry.get("successful_pings").asInt();
-//                int minSuccessRequired = rootNode.get("min_successful_pings").asInt();
-//
-//                if (address.equals(testConfig.getEndpoints().getFirst().getAddress()) && successfulPings >= minSuccessRequired) {
-//                    testPassed = true;
-//                    break;
-//                }
-//            }
-//
-//            log.info("Test Result: {}", testPassed ? "PASS" : "FAIL");
-//            Assert.assertTrue(testPassed, "Expected at least " + rootNode.get("min_successful_pings").asInt() +
-//                    " successful pings for " + testConfig.getEndpoints().getFirst().getAddress());
-//        } catch (IOException e) {
-//            log.error("Error parsing results.json: {}", e.getMessage());
-//            Assert.fail("Failed to parse results.json");
-//        }
-//
-//        cleanUpGeneratedFiles();
-//    }
-
+    //todo update this to validate json structure against passed DTO (exp struct)
     public void validateReportFileStructure() {
         try {
             String resultsFile = "src/main/resources/" + super.getClass().getSimpleName() + "Results.json";
@@ -227,17 +119,34 @@ public class BasePingTests {
         cleanUpGeneratedFiles();
     }
 
-    protected String readFileContent(String filePath) {
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    protected String runPingerCommand(String... args) {
+        StringBuilder output = new StringBuilder();
+        try {
+            ProcessBuilder processBuilder;
+            if (args.length > 0) {
+                String[] command = new String[args.length + 1];
+                command[0] = PINGER_EXECUTABLE;
+                System.arraycopy(args, 0, command, 1, args.length);
+                processBuilder = new ProcessBuilder(command);
+            } else {
+                processBuilder = new ProcessBuilder(PINGER_EXECUTABLE);
+            }
+
+            processBuilder.directory(new File(WORKING_DIRECTORY));
+            processBuilder.redirectErrorStream(true);
+
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+                output.append(line).append("\n");
             }
-        } catch (IOException e) {
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            return "";
         }
-        return content.toString().trim();
+        return output.toString().trim();
     }
 
     @AfterClass

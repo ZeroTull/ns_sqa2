@@ -12,6 +12,6 @@ public class NS05_MyGrandmaTest extends BasePingTests {
 
     @Test
     public void testGrandmaPing() {
-        runPingTest(testConfig);
+        executeTest(testConfig);
     }
 }

@@ -12,6 +12,6 @@ public class NS01_CloudFlareTest extends BasePingTests {
 
     @Test
     public void testCloudflarePing() {
-        runPingTest(testConfig);
+        executeTest(testConfig);
     }
 }

@@ -12,6 +12,6 @@ public class NS03_MySoWanTest extends BasePingTests {
 
     @Test
     public void testSOWANPing() {
-        runPingTest(testConfig);
+        executeTest(testConfig);
     }
 }

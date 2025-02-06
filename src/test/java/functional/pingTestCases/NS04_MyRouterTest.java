@@ -12,6 +12,6 @@ public class NS04_MyRouterTest extends BasePingTests {
 
     @Test
     public void testRouterPing() {
-        runPingTest(testConfig);
+        executeTest(testConfig);
     }
 }

@@ -12,6 +12,6 @@ public class NS02_GoogleDnsTest extends BasePingTests {
 
     @Test
     public void testGooglePing() {
-        runPingTest(testConfig);
+        executeTest(testConfig);
     }
 }
