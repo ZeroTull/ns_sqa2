@@ -2,7 +2,7 @@ package functional;
 
 import org.testng.annotations.Test;
 
-public class NS02_G_VerifyUsageMessageWhenNoArgumentsProvided extends PingerAppGeneralBaseTests {
+public class NS02_G_VerifyUsageMessageWhenNoArgumentsProvided {
     @Test
     public void verifyUsageMessageWhenNoArgumentsProvided() {
 //        String output = runPingerCommand();

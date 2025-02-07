@@ -1,6 +1,7 @@
-package core.entites;
+package com.pinger.automation.core.model.entites.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pinger.automation.core.model.enums.Endpoints;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,10 @@ public class EndpointDto {
     @JsonProperty("ignore")
     private boolean ignore;
 
+    public EndpointDto(Endpoints endpoint) {
+        this.address = endpoint.getAddress();
+        this.description = endpoint.getDescription();
+        this.ignore = endpoint.isIgnore();
+    }
 }
 

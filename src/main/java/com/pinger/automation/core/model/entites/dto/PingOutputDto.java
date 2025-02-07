@@ -1,4 +1,4 @@
-package core.entites;
+package com.pinger.automation.core.model.entites.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -8,14 +8,14 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
-public class PingDataDto {
+public class PingOutputDto {
+    @JsonProperty("start_time")
+    private String startTime;
+    @JsonProperty("end_time")
+    private String endTime;
     @JsonProperty("min_successful_pings")
     private int minSuccessfulPings;
-
     @JsonProperty("max_pings")
     private int maxPings;
-
-    @JsonProperty("endpoints")
-    private List<EndpointDto> endpoints;
-
+    private List<EndpointReportDto> entries;
 }

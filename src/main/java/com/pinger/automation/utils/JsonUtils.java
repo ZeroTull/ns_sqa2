@@ -1,4 +1,4 @@
-package core.utils;
+package com.pinger.automation.utils;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,10 +6,10 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import core.entites.PingDataDto;
+import com.pinger.automation.core.model.CustomException;
+import com.pinger.automation.core.model.entites.dto.OutputDataDto;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import model.CustomException;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public final class JsonUtils {
         }
     }
 
-    public static File createFileFromDto(PingDataDto dto, String filePath) {
+    public static File createFileFromDto(OutputDataDto dto, String filePath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(filePath);

@@ -1,4 +1,4 @@
-package core.utils;
+package com.pinger.automation.utils;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

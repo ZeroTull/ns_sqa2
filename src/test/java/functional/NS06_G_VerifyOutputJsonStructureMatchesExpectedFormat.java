@@ -2,14 +2,14 @@ package functional;
 
 import org.testng.annotations.Test;
 
-public class NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat extends PingerAppGeneralBaseTests {
+public class NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat {
     @Test
     public void verifyOutputJsonStructureMatchesExpectedFormat() {
 
-        String fileName = this.getClass().getSimpleName() + "TestData.json";
-        RESULTS_FILE_PATH = "src/main/resources/";
-
-        createTestConfigFile();
+//        String fileName = this.getClass().getSimpleName() + "TestData.json";
+//        RESULTS_FILE_PATH = "src/main/resources/";
+//
+//        createTestConfigFile();
 //        runPingerCommand("GeneralTestConfig.json", "GeneralTestResults.json");
 //
 //        String jsonContent = readFileContent(RESULTS_FILE_PATH.concat(fileName));

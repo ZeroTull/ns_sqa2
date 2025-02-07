@@ -1,7 +1,9 @@
 package functional.pingTestCases;
 
-import core.entites.TestDataDto;
-import core.factories.TestDataFactory;
+import com.pinger.automation.core.factories.TestDataFactory;
+import com.pinger.automation.core.helpers.BSL;
+import com.pinger.automation.core.model.entites.dto.TestDataDto;
+import com.pinger.automation.core.model.enums.Endpoints;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -10,11 +12,12 @@ public class NS01_CloudFlareTest extends BasePingTests {
 
     @BeforeClass
     public void setupTestConfig() {
-        testData = TestDataFactory.createTestDataDto(this.getClass(), "1.1.1.1", "Cloudflare DNS");
+        testData = TestDataFactory.createTestDataDto(this.getClass(), Endpoints.CLOUDFLARE);
     }
 
     @Test
     public void test() {
-        runPingerApplication(testData);
+        BSL.pingerExecutableHelper.executePinger(testData).processValidScenario();
+        cleanUpGeneratedFiles(testData);
     }
 }

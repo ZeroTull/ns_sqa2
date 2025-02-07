@@ -1,4 +1,4 @@
-package model;
+package com.pinger.automation.core.model;
 
 import java.io.IOException;
 
