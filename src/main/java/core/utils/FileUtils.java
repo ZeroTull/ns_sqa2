@@ -1,12 +1,15 @@
 package core.utils;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.typesafe.config.ConfigFactory;
+import core.entites.PingDataDto;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 @Slf4j
 public final class FileUtils {
@@ -19,22 +22,13 @@ public final class FileUtils {
     }
 
     @SneakyThrows
-    public static <T> T parseResultsFile(String resultsFilePath, TypeReference<T> typeReference) {
-        try {
-            FileUtils.checkIfFileExists(resultsFilePath);
-            // Parse results.json into DTO
-            InputStream is = new FileInputStream(resultsFilePath);
-            String jsonTxt = IOUtils.toString(is, "UTF-8");
-            System.out.println(jsonTxt);
-
-            return JsonUtils.read(jsonTxt, typeReference);
-        } catch (IOException e) {
-            log.error("Error parsing results.json: {}", e.getMessage());
-            throw new JsonGenerationException("Failed to parse results.json");
-        }
+    public static <T> T parseFileToObject(String filePath, TypeReference<T> typeReference) {
+        FileUtils.checkIfFileExists(filePath);
+        // Parse json into DTO
+        return JsonUtils.read(readFileContent(filePath), typeReference);
     }
 
-    private String readFileContent(String filePath) {
+    private static String readFileContent(String filePath) {
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -45,5 +39,25 @@ public final class FileUtils {
             e.printStackTrace();
         }
         return content.toString().trim();
+    }
+
+    //todo update to use Object as type for dto - need to update createFileFromDto to createFileFromJson - or create separate method.
+    // And after this, change dto type to Object and use JsonUtils.toJsonString(dto)
+    public static File createJsonFileFromDto(PingDataDto dto, Class clazz) {
+        return JsonUtils.createFileFromDto(dto, ConfigFactory.load().getString("pinger.workingDirectory").concat(clazz.getSimpleName() + "TestData.json"));
+    }
+
+    public static void deleteFile(String filePath) {
+        File file;
+        try {
+            file = new File(filePath);
+            if (file.exists() && file.delete()) {
+                log.info("Deleted file: {}", filePath);
+            } else {
+                log.warn("Failed to delete file or file does not exist: {}", filePath);
+            }
+        } catch (Exception e) {
+            log.error("File does not exist.");
+        }
     }
 }

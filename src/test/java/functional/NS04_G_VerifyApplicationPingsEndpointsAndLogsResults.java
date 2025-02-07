@@ -2,7 +2,7 @@ package functional;
 
 import org.testng.annotations.Test;
 
-public class NS04_G_VerifyApplicationPingsEndpointsAndLogsResults extends PingerAppGeneralTests{
+public class NS04_G_VerifyApplicationPingsEndpointsAndLogsResults extends PingerAppGeneralBaseTests {
 
     @Test
     public void verifyApplicationPingsEndpointsAndLogsResults() {

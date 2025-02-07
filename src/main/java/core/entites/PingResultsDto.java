@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
-public class PingResults {
+public class PingResultsDto {
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("end_time")

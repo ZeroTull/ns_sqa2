@@ -2,7 +2,7 @@ package functional;
 
 import org.testng.annotations.Test;
 
-public class NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat extends PingerAppGeneralTests{
+public class NS06_G_VerifyOutputJsonStructureMatchesExpectedFormat extends PingerAppGeneralBaseTests {
     @Test
     public void verifyOutputJsonStructureMatchesExpectedFormat() {
 

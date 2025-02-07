@@ -1,9 +1,9 @@
 package smoke;
 
-import functional.PingerAppGeneralTests;
+import functional.PingerAppGeneralBaseTests;
 import org.testng.annotations.Test;
 
-public class NS01_G_VerifyApplicationLaunchesCorrectly extends PingerAppGeneralTests {
+public class NS01_G_VerifyApplicationLaunchesCorrectly extends PingerAppGeneralBaseTests {
 
     @Test
     public void verifyApplicationLaunchesCorrectly() {

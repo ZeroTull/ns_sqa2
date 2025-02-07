@@ -1,9 +1,9 @@
 package sanity;
 
-import functional.PingerAppGeneralTests;
+import functional.PingerAppGeneralBaseTests;
 import org.testng.annotations.Test;
 
-public class NS03_G_VerifyApplicationReadsValidConfigFile extends PingerAppGeneralTests {
+public class NS03_G_VerifyApplicationReadsValidConfigFile extends PingerAppGeneralBaseTests {
     @Test
     public void verifyApplicationReadsValidConfigFile() {
 //        String fileName = createTestConfigFile();

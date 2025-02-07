@@ -36,13 +36,18 @@ public final class JsonUtils {
         }
     }
 
-    public static void saveDtoToJsonFile(PingDataDto dto, String filePath) {
+    public static File createFileFromDto(PingDataDto dto, String filePath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), dto);
+            File file = new File(filePath);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(file, dto);
             log.info("DTO saved to {}", filePath);
+            log.info("File content: {}", JsonUtils.toJsonString(dto));
+            return file;
         } catch (IOException e) {
             log.error("Failed to save DTO: {}", e.getMessage());
+            //todo check exception
+            throw new CustomException("Failed to save DTO: {}", e);
         }
     }
 

@@ -22,5 +22,4 @@ public class PingDataDtoFactory {
         config.setEndpoints(Collections.singletonList(endpoint));
         return config;
     }
-
 }

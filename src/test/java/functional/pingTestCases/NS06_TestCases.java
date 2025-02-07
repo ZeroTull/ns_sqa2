@@ -9,14 +9,14 @@ import java.util.List;
 public class NS06_TestCases extends BasePingTests {
     @Test
     public void ignoredEndpointTest() {
-        testConfig = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Ignored", true, 1, 1);
-        executeTest(testConfig);
+        dto = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Ignored", true, 1, 1);
+        executeTest(dto);
     }
 
     @Test
     public void minSuccessfulPingsEdgeCaseTest() {
-        testConfig = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Edge", false, 5, 3);
-        executeTest(testConfig);
+        dto = pingDataDtoFactory.createPingDataDto("8.8.8.8", "Google DNS Edge", false, 5, 3);
+        executeTest(dto);
     }
 
     @Test
@@ -32,11 +32,11 @@ public class NS06_TestCases extends BasePingTests {
         EndpointDto endpoint2 = new EndpointDto("1.1.1.1", "Cloudflare DNS", false);
         EndpointDto endpoint3 = new EndpointDto("123.123.123.123", "Unreachable", false);
 
-        testConfig = new PingDataDto();
-        testConfig.setMinSuccessfulPings(1);
-        testConfig.setMaxPings(2);
-        testConfig.setEndpoints(List.of(endpoint1, endpoint2, endpoint3));
+        dto = new PingDataDto();
+        dto.setMinSuccessfulPings(1);
+        dto.setMaxPings(2);
+        dto.setEndpoints(List.of(endpoint1, endpoint2, endpoint3));
 
-        executeTest(testConfig);
+        executeTest(dto);
     }
 }

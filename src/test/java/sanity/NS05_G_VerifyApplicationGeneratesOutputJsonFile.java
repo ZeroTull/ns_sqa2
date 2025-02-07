@@ -1,9 +1,9 @@
 package sanity;
 
-import functional.PingerAppGeneralTests;
+import functional.PingerAppGeneralBaseTests;
 import org.testng.annotations.Test;
 
-public class NS05_G_VerifyApplicationGeneratesOutputJsonFile extends PingerAppGeneralTests {
+public class NS05_G_VerifyApplicationGeneratesOutputJsonFile extends PingerAppGeneralBaseTests {
     @Test
     public void verifyApplicationGeneratesOutputJsonFile() {
         RESULTS_FILE_PATH = "src/main/resources/";
