@@ -1,7 +1,7 @@
 package com.pinger.automation.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.pinger.automation.core.model.entites.dto.OutputDataDto;
+import com.pinger.automation.core.model.entites.dto.input.InputDataDto;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +42,7 @@ public final class FileUtils {
 
     //todo update to use Object as type for dto - need to update createFileFromDto to createFileFromJson - or create separate method.
     // And after this, change dto type to Object and use JsonUtils.toJsonString(dto)
-    public static File createJsonFileFromDto(OutputDataDto dto, String directory, String fileName) {
+    public static File createJsonFileFromDto(InputDataDto dto, String directory, String fileName) {
         return JsonUtils.createFileFromDto(dto, directory.concat(fileName));
     }
 

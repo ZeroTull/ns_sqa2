@@ -1,6 +1,6 @@
 package functional.pingTestCases;
 
-import com.pinger.automation.core.factories.TestDataFactory;
+import com.pinger.automation.core.factories.PingerTestDataFactory;
 import com.pinger.automation.core.helpers.BSL;
 import com.pinger.automation.core.model.entites.dto.TestDataDto;
 import com.pinger.automation.core.model.enums.Endpoints;
@@ -12,7 +12,7 @@ public class NS01_CloudFlareTest extends BasePingTests {
 
     @BeforeClass
     public void setupTestConfig() {
-        testData = TestDataFactory.createTestDataDto(this.getClass(), Endpoints.CLOUDFLARE);
+        testData = PingerTestDataFactory.createTestDataDto(this.getClass(), Endpoints.CLOUDFLARE);
     }
 
     @Test

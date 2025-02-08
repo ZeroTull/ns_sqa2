@@ -1,9 +1,11 @@
-package com.pinger.automation.core.model.entites;
+package com.pinger.automation.core.model.entites.dto;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-public class PingerDataFile {
+@Accessors(chain = true)
+public class PingerDataFileDto {
     private String name;
     private String directory;
     private String path;

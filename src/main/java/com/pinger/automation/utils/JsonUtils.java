@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.pinger.automation.core.model.CustomException;
-import com.pinger.automation.core.model.entites.dto.OutputDataDto;
+import com.pinger.automation.core.model.entites.dto.input.InputDataDto;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +36,7 @@ public final class JsonUtils {
         }
     }
 
-    public static File createFileFromDto(OutputDataDto dto, String filePath) {
+    public static File createFileFromDto(InputDataDto dto, String filePath) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(filePath);

@@ -1,12 +1,20 @@
 package sanity;
 
+import com.pinger.automation.core.factories.PingerTestDataFactory;
+import com.pinger.automation.core.model.entites.dto.TestDataDto;
+import com.pinger.automation.core.model.enums.Endpoints;
+import com.pinger.automation.utils.AppRunner;
+import com.pinger.automation.utils.PingerConfig;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class NS03_G_VerifyApplicationReadsValidConfigFile {
     @Test
     public void verifyApplicationReadsValidConfigFile() {
-//        String fileName = createTestConfigFile();
-//        String output = runPingerCommand(fileName, "GeneralTestResults.json");
-//        Assert.assertTrue(output.contains("Loading configuration"), "Application did not read the valid configuration file.");
+        TestDataDto testDataDto = PingerTestDataFactory.createTestDataDto(this.getClass(), Endpoints.GOOGLE_DNS);
+        String inputFileName = testDataDto.getInputDataFile().getName();
+        String output = AppRunner.runApplication(PingerConfig.getPingerExecutable(), PingerConfig.getPingerWorkingDirectory(), inputFileName);
+
+        Assert.assertTrue(output.contains(String.format("Loading configuration from %s..", inputFileName)), "Application successfully runs with only input file provided.");
     }
 }
