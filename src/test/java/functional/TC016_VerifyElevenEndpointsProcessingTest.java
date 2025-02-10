@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class TC015_VerifyElevenEndpointsProcessingTest extends BasePingTests {
+public class TC016_VerifyElevenEndpointsProcessingTest extends BasePingTests {
     private TestDataDto testData;
 
     @BeforeClass

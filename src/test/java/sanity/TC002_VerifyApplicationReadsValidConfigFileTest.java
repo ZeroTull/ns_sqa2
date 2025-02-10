@@ -23,7 +23,7 @@ public class TC002_VerifyApplicationReadsValidConfigFileTest extends BasePingTes
 
     @Test()
     @Description("Application successfully loads configuration JSON and exits without errors.")
-    public void verifyApplicationReadsValidConfigFile() {
+    public void test() {
         String output = AppRunner.runApplication(PingerAppConfig.getPingerExecutable(), PingerAppConfig.getPingerWorkingDirectory(), configName);
         Assert.assertTrue(output.contains(String.format("Loading configuration from %s..", configName)), "Application successfully runs with only input file provided.");
         cleanUpGeneratedFile(PingerAppConfig.getPingerWorkingDirectory() + configName);
