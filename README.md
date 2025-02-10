@@ -1,93 +1,250 @@
-# ns_sqa2
+# Pinger Test Automation Framework
 
+This project is an **automated testing framework** for the **Pinger application**. It validates the behavior of a tool
+that pings endpoints and generates reports.
 
+---
 
-## Getting started
+## Table of Contents
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+1. [Overview](#1-overview)
+2. [Prerequisites for Running Tests Locally](#2-prerequisites-for-running-tests-locally)
+   - [Java Development Kit (JDK 21+)](#21-java-development-kit-jdk-21)
+   - [Apache Maven (Build Tool)](#22-apache-maven-build-tool)
+   - [Git (For Cloning the Repository)](#23-git-for-cloning-the-repository)
+   - [Allure Report (For Viewing Test Results)](#24-allure-report-for-viewing-test-results)
+3. [Installation](#3-installation)
+   - [Clone the Repository](#31-clone-the-repository)
+   - [Navigate to the Project Folder](#32-navigate-to-the-project-folder)
+   - [Install Dependencies](#33-install-dependencies)
+   - [Compile the Pinger App](#34-compile-the-pinger-app)
+4. [Running Tests Locally](#4-running-tests)
+   - [Run All Tests](#41-run-all-tests)
+   - [Run a Specific Test](#42-run-a-specific-test)
+   - [Run Tests with Logging](#43-run-tests-with-logging)
+5. [Viewing Test Reports](#5-viewing-test-reports)
+   - [View Reports in the Console](#51-view-reports-in-the-console)
+   - [View Reports in Allure](#52-view-reports-in-allure)
+6. [Run Test Cases Using GitHub Actions](#6-run-test-cases-using-github-actions)
+7. [Test Coverage And Bugs](#7-test-coverage-and-bugs)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+---
 
-## Add your files
+## 1. Overview
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### **What Does This Project Do?**
+
+- **Automates testing** for the Pinger application.
+- **Sends pings to specified endpoints**.
+- **Generates JSON reports** and validates them.
+- **Uses Maven and TestNG** for test execution.
+- **Provides Allure reports** for test results.
+  ukz
+---
+
+## 2. Prerequisites for Running Tests Locally
+
+Before you start, **install the following tools**:
+
+### Required Software:
+
+### 2.1 Linux Os or Mac Os
+
+### 2.2 IntelliJ IDEA
+
+### 2.3 Java Development Kit (JDK 21+)
+
+- Download: [Temurin JDK](https://adoptium.net/en-GB/temurin/releases/?version=21&package=jdk&os=linux)
+- Verify installation:
+
+```sh
+java -version
+```
+
+### 2.4 Apache Maven (Build Tool)
+
+- Download: [Maven Official Site](https://maven.apache.org/)
+- Verify installation:
+
+```sh
+mvn -version
+```
+
+### 2.5 Git (For Cloning the Repository)
+
+- Download: [Git Website](https://git-scm.com/)
+- Verify installation:
+
+```sh
+git --version
+```
+
+### 2.6 Allure Report (For Viewing Test Results)
+
+- Install Allure:
+
+```sh
+brew install allure    # macOS
+sudo apt update && sudo apt install allure    # Linux
+```
+
+- Verify installation:
+
+```sh
+allure --version
+```
+
+---
+
+## 3. Installation
+
+### 3.1 Clone the Repository
+
+```sh
+git clone https://github.com/your-repo/pinger-automation.git
+```
+
+### 3.2 Navigate to the Project Folder
+
+```sh
+cd pinger-automation
+```
+
+### 3.3 Install Dependencies
+
+If you're running tests from IntelliJ IDEA, enable **Annotation Processing**:
+
+Navigate to:
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/Chervanov/ns_sqa2.git
-git branch -M main
-git push -uf origin main
+Preferences -> Build, Execution, Deployment -> Compiler -> Annotation Processors
 ```
 
-## Integrate with your tools
+Then, execute:
 
-- [ ] [Set up project integrations](https://gitlab.com/Chervanov/ns_sqa2/-/settings/integrations)
+```sh
+mvn clean package -DskipTests
+```
 
-## Collaborate with your team
+### 3.4 Compile the Pinger App
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+#### 3.4.1 Go to the [Pinger Application Repository](https://github.com/NordSecurity-Interviews/llt-pinger-home-assignment)
 
-## Test and Deploy
+#### 3.4.2 Clone the Repository
 
-Use the built-in continuous integration in GitLab.
+```sh
+git clone https://github.com/NordSecurity-Interviews/llt-pinger-home-assignment
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+#### 3.4.3 Navigate to the Project Folder
 
-***
+```sh
+cd path/to/pinger/repository/
+```
 
-# Editing this README
+#### 3.4.4 Build the Pinger Application
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```sh
+go build
+```
 
-## Suggestions for a good README
+#### 3.4.5 Move the Pinger Executable to the Automation Folder
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```sh
+mv /path/to/pinger/file ~/src/main/resources/testData/
+```
 
-## Name
-Choose a self-explaining name for your project.
+Example:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+```sh
+mv ~/Downloads/file.txt ~/Documents/
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+#### 3.4.6 Compile the Project
+```sh
+mvn clean install
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+---
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## 4. Running Tests
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### 4.1 Run All Tests
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+```sh
+mvn test
+```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### 4.2 Run a Specific Test
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+```sh
+mvn -Dtest=TestClassName test
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Example:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```sh
+mvn -Dtest=TTC007_VerifyPingerFlowWithValidReportTest test
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 4.3 Run Tests with Logging
 
-## License
-For open source projects, say how it is licensed.
+```sh
+mvn test -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+### 4.3 Run Tests using IntelliJ IDEA
+
+#### 4.3.1. Open project using IntelliJ IDEA
+
+#### 4.3.2. Install Lombok Plugin (Settings -> Plugins)
+
+#### 4.3.3. Right click on any test case or folder and Run test by choosing 'Run' option
+
+---
+
+## 5. Viewing Test Reports
+
+### 5.1 View Reports in the Console
+
+Test results will be printed in the terminal.
+
+### 5.2 View Reports in Allure
+
+```sh
+allure serve target/allure-results
+```
+
+---
+
+## 6. Run Test Cases Using GitHub Actions
+
+### 6.1 Go to the [ns_sqa2 Repository](https://github.com/ZeroTull/ns_sqa2)
+
+### 6.2 Navigate to the **Actions** Tab
+
+### 6.3 Click **Execute Pinger Test Cases**
+
+### 6.4 Click **Run Workflow** and Confirm by Clicking **Run Workflow** Again
+
+#### **To Check Reports:**
+
+### 6.5 Click **All Workflows**
+
+### 6.6 Click **Pages Build and Deployment**
+
+### 6.7 Click **[View Reports](https://ZeroTull.github.io/ns_sqa2/)** at the Deploy Section
+
+## 7. Test Coverage and Bugs
+
+A detailed list of **test coverage** and **reported bugs** is maintained in the following Google Sheet:
+
+🔗 [Test Coverage & Bugs Sheet](https://docs.google.com/spreadsheets/d/1n0aArhWWt23icpuaUhhzXYnUWfgkP5NkKgCbRunTQW8/edit?gid=168947223#gid=168947223)
+
+This document includes:
+
+- Test cases
+- Identified defects
+
+---
+
