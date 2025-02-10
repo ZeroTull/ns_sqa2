@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public final class ConfigDataDtoFactory {
     public static ConfigDto getConfigDataDto(Endpoint endpoint) {
-        return getConfigDataDto(endpoint, 1, 1);
+        return getConfigDataDto(endpoint, 2, 3);
     }
 
     public static ConfigDto getConfigDataDto(Endpoint endpoint, int minSuccess, int maxPings) {
