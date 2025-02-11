@@ -3,7 +3,6 @@ package sanity;
 import com.pinger.automation.core.annotations.Defect;
 import com.pinger.automation.core.factories.TestDataDtoFactory;
 import com.pinger.automation.core.helpers.executable.PingerExecutableHelper;
-import com.pinger.automation.core.model.entites.dto.TestDataDto;
 import com.pinger.automation.core.model.entites.dto.report.EntryDto;
 import com.pinger.automation.core.model.entites.dto.report.ReportDto;
 import com.pinger.automation.core.model.enums.Endpoint;
@@ -16,8 +15,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class TC007_VerifyAvailableEndpointHasSuccessfulPingsTest extends BasePingTests {
-    private TestDataDto testData;
-
     @BeforeClass
     public void beforeClass() {
         testData = TestDataDtoFactory.createTestDataDto(this.getClass(), Endpoint.GOOGLE_DNS);

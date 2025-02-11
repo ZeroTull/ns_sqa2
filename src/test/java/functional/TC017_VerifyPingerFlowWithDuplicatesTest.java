@@ -4,7 +4,6 @@ import com.pinger.automation.core.annotations.Defect;
 import com.pinger.automation.core.factories.TestDataDtoFactory;
 import com.pinger.automation.core.helpers.executable.PingerExecutableHelper;
 import com.pinger.automation.core.model.entites.dto.EndpointDto;
-import com.pinger.automation.core.model.entites.dto.TestDataDto;
 import com.pinger.automation.core.model.entites.dto.config.ConfigDto;
 import com.pinger.automation.core.model.enums.Endpoint;
 import io.qameta.allure.Description;
@@ -14,8 +13,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class TC017_VerifyPingerFlowWithDuplicatesTest extends BasePingTests {
-    private TestDataDto testData;
-
     @BeforeClass
     public void setupTestConfig() {
         ConfigDto configDto = new ConfigDto();
@@ -29,6 +26,5 @@ public class TC017_VerifyPingerFlowWithDuplicatesTest extends BasePingTests {
     @Description("Should not execute pings for duplicated endpoints")
     public void test() {
         PingerExecutableHelper.getPingerClient(testData).processValidScenario();
-        cleanUpGeneratedFiles(testData);
     }
 }

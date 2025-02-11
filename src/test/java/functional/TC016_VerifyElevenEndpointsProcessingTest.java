@@ -3,7 +3,6 @@ package functional;
 import com.pinger.automation.core.factories.TestDataDtoFactory;
 import com.pinger.automation.core.helpers.executable.PingerExecutableHelper;
 import com.pinger.automation.core.model.entites.dto.EndpointDto;
-import com.pinger.automation.core.model.entites.dto.TestDataDto;
 import com.pinger.automation.core.model.entites.dto.config.ConfigDto;
 import com.pinger.automation.core.model.enums.Endpoint;
 import io.qameta.allure.Description;
@@ -14,8 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TC016_VerifyElevenEndpointsProcessingTest extends BasePingTests {
-    private TestDataDto testData;
-
     @BeforeClass
     public void setupTestConfig() {
         ConfigDto configDto = new ConfigDto();
@@ -35,6 +32,5 @@ public class TC016_VerifyElevenEndpointsProcessingTest extends BasePingTests {
     @Description("Execution of config file that has more than 10 endpoints.")
     public void test() {
         PingerExecutableHelper.getPingerClient(testData).processValidScenario();
-        cleanUpGeneratedFiles(testData);
     }
 }

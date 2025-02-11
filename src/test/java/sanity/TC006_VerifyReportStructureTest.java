@@ -4,7 +4,6 @@ import com.pinger.automation.core.annotations.Defect;
 import com.pinger.automation.core.factories.TestDataDtoFactory;
 import com.pinger.automation.core.helpers.executable.PingerExecutableHelper;
 import com.pinger.automation.core.model.entites.dto.EndpointDto;
-import com.pinger.automation.core.model.entites.dto.TestDataDto;
 import com.pinger.automation.core.model.entites.dto.config.ConfigDto;
 import com.pinger.automation.core.model.enums.Endpoint;
 import com.pinger.automation.utils.PingerAppConfig;
@@ -19,8 +18,6 @@ import java.util.List;
 import static com.pinger.automation.utils.JsonSchemaValidator.validateJsonSchema;
 
 public class TC006_VerifyReportStructureTest extends BasePingTests {
-    private TestDataDto testData;
-
     @BeforeClass
     public void beforeClass() {
         ConfigDto configDto = new ConfigDto();

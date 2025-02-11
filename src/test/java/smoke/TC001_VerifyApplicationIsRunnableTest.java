@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TC001_VerifyApplicationIsRunnableTest {
-
     @Test
     @Description("Verify application usage message when no arguments are provided")
     public void test() {
