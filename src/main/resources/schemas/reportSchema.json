@@ -41,7 +41,9 @@
       "properties": {
         "addr": {
           "type": "string",
-          "description": "An IPv4 address in dotted decimal notation."
+          "description": "An IPv4 address in dotted decimal notation.",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|1?[0-9][0-9]?)$"
+
         },
         "description": {
           "type": "string",
