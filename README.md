@@ -5,16 +5,14 @@ that pings endpoints and generates reports.
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 
 1. [Overview](#1-overview)
 2. [Prerequisites for Running Tests Locally](#2-prerequisites-for-running-tests-locally)
-   - [Linux OS or macOS](#21-linux-os-or-macos)
-   - [IntelliJ IDEA](#22-intellij-idea-optional)
-   - [Java Development Kit (JDK 21+)](#23-java-development-kit-jdk-21)
-   - [Apache Maven (Build Tool)](#24-apache-maven-build-tool)
-   - [Git (For Cloning the Repository)](#25-git-for-cloning-the-repository)
-   - [Allure Report (For Viewing Test Results)](#26-allure-report-for-viewing-test-results)
+   - [Java Development Kit (JDK 21+)](#21-java-development-kit-jdk-21)
+   - [Apache Maven (Build Tool)](#22-apache-maven-build-tool)
+   - [Git (For Cloning the Repository)](#23-git-for-cloning-the-repository)
+   - [Allure Report (For Viewing Test Results)](#24-allure-report-for-viewing-test-results)
 3. [Installation](#3-installation)
    - [Clone the Repository](#31-clone-the-repository)
    - [Navigate to the Project Folder](#32-navigate-to-the-project-folder)
@@ -24,17 +22,15 @@ that pings endpoints and generates reports.
    - [Run All Tests](#41-run-all-tests)
    - [Run a Specific Test](#42-run-a-specific-test)
    - [Run Tests with Logging](#43-run-tests-with-logging)
-   - [Run Tests Using IntelliJ IDEA](#44-run-tests-using-intellij-idea)
 5. [Viewing Test Reports](#5-viewing-test-reports)
    - [View Reports in the Console](#51-view-reports-in-the-console)
    - [View Reports in Allure](#52-view-reports-in-allure)
 6. [Run Test Cases Using GitHub Actions](#6-run-test-cases-using-github-actions)
-   - [Checking Reports](#65-checking-reports)
-7. [Test Coverage and Bugs](#7-test-coverage-and-bugs)
+7. [Test Coverage And Bugs](#7-test-coverage-and-bugs)
 
 ---
 
-## **1. Overview**
+## 1. Overview
 
 ### **What Does This Project Do?**
 
@@ -43,21 +39,24 @@ that pings endpoints and generates reports.
 - **Generates JSON reports** and validates them.
 - **Uses Maven and TestNG** for test execution.
 - **Provides Allure reports** for test results.
-
+  ukz
 ---
 
-## **2. Prerequisites for Running Tests Locally**
+## 2. Prerequisites for Running Tests Locally
 
 Before you start, **install the following tools**:
 
-### **2.1 Linux OS or macOS**
+### Required Software:
 
-### **2.2 IntelliJ IDEA (Optional)**
-- Recommended for development, debugging, and running tests with ease.
+### 2.1 Linux Os or Mac Os
 
-### **2.3 Java Development Kit (JDK 21+)**
+### 2.2 IntelliJ IDEA
+
+### 2.3 Java Development Kit (JDK 21+)
+
 - Download: [Temurin JDK](https://adoptium.net/en-GB/temurin/releases/?version=21&package=jdk&os=linux)
 - Verify installation:
+
 ```sh
 java -version
 ```
@@ -86,7 +85,7 @@ git --version
 
 ```sh
 brew install allure    # macOS
-sudo apt update && sudo apt install allure    # Linux Os
+sudo apt update && sudo apt install allure    # Linux
 ```
 
 - Verify installation:
@@ -129,7 +128,7 @@ mvn clean package -DskipTests
 
 ### 3.4 Compile the Pinger App
 
-#### 3.4.1 Go to the [Pinger Application Repository](https://github.com/ZeroTull/Norbert)
+#### 3.4.1 Go to the [Pinger Application Repository](https://github.com/NordSecurity-Interviews/llt-pinger-home-assignment)
 
 #### 3.4.2 Clone the Repository
 
@@ -218,25 +217,25 @@ allure serve target/allure-results
 
 ---
 
-## 6. Run Test Cases Using GitHub Actions
+### 6. Run Test Cases Using GitHub Actions
 
-### 6.1 Go to the [ns_sqa2 Repository](https://github.com/ZeroTull/ns_sqa2)
+#### 6.1 Go to the [ns_sqa2 Repository](https://github.com/ZeroTull/ns_sqa2)
 
-### 6.2 Navigate to the **Actions** Tab
+#### 6.2 Navigate to the **Actions** Tab
 
-### 6.3 Click **Execute Pinger Test Cases**
+#### 6.3 Click **Execute Pinger Test Cases**
 
-### 6.4 Click **Run Workflow** and Confirm by Clicking **Run Workflow** Again
+#### 6.4 Click **Run Workflow** and Confirm by Clicking **Run Workflow** Again
 
-#### **Checking Reports:**
+#### **To Check Reports:**
 
-### 6.5 Click **All Workflows**
+#### 6.5 Click **All Workflows**
 
-### 6.6 Click **Pages Build and Deployment**
+#### 6.6 Click **Pages Build and Deployment**
 
-### 6.7 Click **[View Reports](https://ZeroTull.github.io/ns_sqa2/)** at the Deploy Section
+#### 6.7 Click **View Reports** at the Deploy Section
 
-## 7. Test Coverage and Bugs
+### 7. Test Coverage and Bugs
 
 A detailed list of **test coverage** and **reported bugs** is maintained in the following Google Sheet:
 
